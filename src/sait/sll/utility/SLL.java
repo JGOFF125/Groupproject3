@@ -88,7 +88,6 @@ public class SLL implements LinkedListADT, Serializable {
 		}
 	}
 
-	@Override
 	public void set(Object data, int index) throws IndexOutOfBoundsException {
 		if (index < 0 || index >= this.size) {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
@@ -100,7 +99,6 @@ public class SLL implements LinkedListADT, Serializable {
 		current.setData(data); 
 	}
 
-	@Override
 	public Object get(int index) throws IndexOutOfBoundsException {
 		if (index < 0 || index >= this.size) {
 			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
@@ -141,46 +139,55 @@ public class SLL implements LinkedListADT, Serializable {
 		this.size = 0;
 	}
 
-	@Override
-	@Override
-public void delete(int index) throws IndexOutOfBoundsException {
-	if (index < 0 || index >= this.size) {
-		throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
-	}
 
+	/**
+	 * Person 3: Cleanup & Deletion
+	 * Removes the node at the specified index from the linked list.
+	 * * @param index The position of the node to remove (0-based).
+	 * @throws IndexOutOfBoundsException if the index is invalid.
+	 */
+	public void remove(int index) throws IndexOutOfBoundsException {
+		// 1. Boundary Check: Ensure the index actually exists
+		if (index < 0 || index >= this.size) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+		}
 
-	if (index == 0) {
-		this.head = this.head.getNext();
-
+	// Case 1: Removing the very first node (Head)
+		if (index == 0) {
+			// Tell the head pointer to skip the first person and point to the second person
+			this.head = this.head.getNext();
+			
+			// If we just deleted the ONLY person in the list, the tail needs to be null too
+			if (this.head == null) {
+				this.tail = null;
+			}
+		} 
+	 //Removing from the middle or the end
+		else {
+			// Start at the front
+			Node current = this.head;
+			
+			// Walk forward until we are standing exactly ONE spot BEFORE the node we want to delete
+			for (int i = 0; i < index - 1; i++) {
+				current = current.getNext();
+			}
+			
+			// Identify the specific node we are kicking out
+			Node nodeToRemove = current.getNext();
+			
+			// Rewire the chain: Tell the current node to bypass the deleted node and grab the next one
+			current.setNext(nodeToRemove.getNext());
+			
+			// If the node we just kicked out happened to be the Tail (the very last node),
+			//  update the tail pointer to look at the new last person.
+			if (nodeToRemove == this.tail) {
+				this.tail = current;
+			}
+		}
 		
-		if (this.head == null) {
-			this.tail = null;
-		}
+		// Shrink the size tracker by 1 since we successfully removed someone
+		this.size--; 
 	}
-
-	else if (index == this.size - 1) {
-		Node current = this.head;
-
-		for (int i = 0; i < this.size - 2; i++) {
-			current = current.getNext();
-		}
-
-		current.setNext(null);
-		this.tail = current;
-	}
-
-	else {
-		Node current = this.head;
-
-		for (int i = 0; i < index - 1; i++) {
-			current = current.getNext();
-		}
-
-		current.setNext(current.getNext().getNext());
-	}
-
-	this.size--;
-}
 		
 	}
-}
+

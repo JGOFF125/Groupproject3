@@ -22,8 +22,9 @@ class SerializationTest {
 		this.baos = new ByteArrayOutputStream();
 		this.oos = new ObjectOutputStream(this.baos);
 		
-		// Create your implemented linked list here and assign to the linkedList attribute.
-		//this.users = new SLL(); 
+		// UNCOMMENTED this line so the list is actually created!
+		this.users = new SLL(); 
+		
 		this.users.append(new User(1, "Joe Blow", "jblow@gmail.com", "password"));
 		this.users.append(new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", "abcdef"));
 		this.users.append(new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", "kfc5555"));
@@ -71,25 +72,25 @@ class SerializationTest {
 		assertFalse(users.isEmpty());
 		
 		User expectedUser1 = new User(1, "Joe Blow", "jblow@gmail.com", null);
-		User actualUser1 = (User) users.retrieve(0);
+		User actualUser1 = (User) users.get(0);
 		
 		assertEquals(expectedUser1, actualUser1);
 		assertTrue(actualUser1.isCorrectPassword(null));
 		
 		User expectedUser2 = new User(2, "Joe Schmoe", "joe.schmoe@outlook.com", null);
-		User actualUser2 = (User) users.retrieve(1);
+		User actualUser2 = (User) users.get(1);
 		
 		assertEquals(expectedUser2, actualUser2);
 		assertTrue(actualUser2.isCorrectPassword(null));
 		
 		User expectedUser3 = new User(3, "Colonel Sanders", "chickenlover1890@gmail.com", null);
-		User actualUser3 = (User) users.retrieve(2);
+		User actualUser3 = (User) users.get(2);
 		
 		assertEquals(expectedUser3, actualUser3);
 		assertTrue(actualUser3.isCorrectPassword(null));
 		
 		User expectedUser4 = new User(4, "Ronald McDonald", "burgers4life63@outlook.com", null);
-		User actualUser4 = (User) users.retrieve(3);
+		User actualUser4 = (User) users.get(3);
 		
 		assertEquals(expectedUser4, actualUser4);
 		assertTrue(actualUser4.isCorrectPassword(null));

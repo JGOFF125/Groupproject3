@@ -54,10 +54,10 @@ class LinkedListTest {
 		assertFalse(this.linkedList.isEmpty());
 		assertEquals(4, this.linkedList.size());
 
-		assertEquals("a", this.linkedList.retrieve(0));
-		assertEquals("b", this.linkedList.retrieve(1));
-		assertEquals("c", this.linkedList.retrieve(2));
-		assertEquals("d", this.linkedList.retrieve(3));
+		assertEquals("a", this.linkedList.get(0));
+		assertEquals("b", this.linkedList.get(1));
+		assertEquals("c", this.linkedList.get(2));
+		assertEquals("d", this.linkedList.get(3));
 	}
 
 	/**
@@ -73,10 +73,10 @@ class LinkedListTest {
 		assertFalse(this.linkedList.isEmpty());
 		assertEquals(4, this.linkedList.size());
 
-		assertEquals("d", this.linkedList.retrieve(0));
-		assertEquals("c", this.linkedList.retrieve(1));
-		assertEquals("b", this.linkedList.retrieve(2));
-		assertEquals("a", this.linkedList.retrieve(3));
+		assertEquals("d", this.linkedList.get(0));
+		assertEquals("c", this.linkedList.get(1));
+		assertEquals("b", this.linkedList.get(2));
+		assertEquals("a", this.linkedList.get(3));
 	}
 
 	
@@ -95,11 +95,11 @@ class LinkedListTest {
 		assertFalse(this.linkedList.isEmpty());
 		assertEquals(5, this.linkedList.size());
 
-		assertEquals("a", this.linkedList.retrieve(0));
-		assertEquals("b", this.linkedList.retrieve(1));
-		assertEquals("e", this.linkedList.retrieve(2));
-		assertEquals("c", this.linkedList.retrieve(3));
-		assertEquals("d", this.linkedList.retrieve(4));
+		assertEquals("a", this.linkedList.get(0));
+		assertEquals("b", this.linkedList.get(1));
+		assertEquals("e", this.linkedList.get(2));
+		assertEquals("c", this.linkedList.get(3));
+		assertEquals("d", this.linkedList.get(4));
 	}
 
 	
@@ -113,15 +113,15 @@ class LinkedListTest {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.replace("e", 2);
+		this.linkedList.set("e", 2);
 
 		assertFalse(this.linkedList.isEmpty());
 		assertEquals(4, this.linkedList.size());
 
-		assertEquals("a", this.linkedList.retrieve(0));
-		assertEquals("b", this.linkedList.retrieve(1));
-		assertEquals("e", this.linkedList.retrieve(2));
-		assertEquals("d", this.linkedList.retrieve(3));
+		assertEquals("a", this.linkedList.get(0));
+		assertEquals("b", this.linkedList.get(1));
+		assertEquals("e", this.linkedList.get(2));
+		assertEquals("d", this.linkedList.get(3));
 	}
 	
 	/**
@@ -134,15 +134,15 @@ class LinkedListTest {
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.delete(2);
+		this.linkedList.remove(2);
 		
 
 		assertFalse(this.linkedList.isEmpty());
 		assertEquals(3, this.linkedList.size());
 
-		assertEquals("a", this.linkedList.retrieve(0));
-		assertEquals("b", this.linkedList.retrieve(1));
-		assertEquals("d", this.linkedList.retrieve(2));
+		assertEquals("a", this.linkedList.get(0));
+		assertEquals("b", this.linkedList.get(1));
+		assertEquals("d", this.linkedList.get(2));
 	}
 	
 	/**
@@ -162,9 +162,10 @@ class LinkedListTest {
 		int index = this.linkedList.indexOf("b");
 		assertEquals(1, index);
 
-		String value = (String) this.linkedList.retrieve(1);
+		String value = (String) this.linkedList.get(1);
 		assertEquals("b", value);
 	}
+	
 	@Test
 	void testClearList() {
 		linkedList.append("a");
@@ -183,9 +184,9 @@ class LinkedListTest {
 		linkedList.append("b");
 		linkedList.append("c");
 
-		linkedList.delete(0);
+		linkedList.remove(0);
 
-		assertEquals("b", linkedList.retrieve(0));
+		assertEquals("b", linkedList.get(0));
 		assertEquals(2, linkedList.size());
 	}
 
@@ -195,10 +196,10 @@ class LinkedListTest {
 		linkedList.append("b");
 		linkedList.append("c");
 
-		linkedList.delete(2);
+		linkedList.remove(2);
 
 		assertEquals(2, linkedList.size());
-		assertEquals("b", linkedList.retrieve(1));
+		assertEquals("b", linkedList.get(1));
 	}
 
 	@Test
@@ -208,7 +209,7 @@ class LinkedListTest {
 
 		linkedList.insert("a", 0);
 
-		assertEquals("a", linkedList.retrieve(0));
+		assertEquals("a", linkedList.get(0));
 		assertEquals(3, linkedList.size());
 	}
 

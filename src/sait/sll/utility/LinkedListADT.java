@@ -6,10 +6,10 @@ public interface LinkedListADT {
 	void append(Object data);
 	void prepend(Object data);
 	void insert(Object data, int index) throws IndexOutOfBoundsException;
-	void replace(Object data, int index) throws IndexOutOfBoundsException;
 	int size();
-	void delete(int index) throws IndexOutOfBoundsException;
-	Object retrieve(int index) throws IndexOutOfBoundsException;
+	void remove(int index) throws IndexOutOfBoundsException;
 	int indexOf(Object data);
 	boolean contains(Object data);
+	void set(Object data, int index) throws IndexOutOfBoundsException;
+	Object get(int index) throws IndexOutOfBoundsException;
 }
