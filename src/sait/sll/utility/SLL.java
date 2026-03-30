@@ -67,33 +67,82 @@ public class SLL implements LinkedListADT, Serializable {
 
 	// these are for the other parts of the project
 	@Override
-	public void clear() {
-	}
-
-	@Override
 	public void insert(Object data, int index) throws IndexOutOfBoundsException {
+		if (index < 0 || index > this.size) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+		}
+
+		if (index == 0) {
+			prepend(data);
+		} else if (index == this.size) {
+			append(data);
+		} else {
+			Node current = this.head;
+			for (int i = 0; i < index - 1; i++) {
+				current = current.getNext();
+			}
+			Node newNode = new Node(data);
+			newNode.setNext(current.getNext());
+			current.setNext(newNode);
+			this.size++; 
+		}
 	}
 
 	@Override
-	public void replace(Object data, int index) throws IndexOutOfBoundsException {
+	public void set(Object data, int index) throws IndexOutOfBoundsException {
+		if (index < 0 || index >= this.size) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+		}
+		Node current = this.head;
+		for (int i = 0; i < index; i++) {
+			current = current.getNext();
+		}
+		current.setData(data); 
 	}
 
 	@Override
-	public void delete(int index) throws IndexOutOfBoundsException {
-	}
-
-	@Override
-	public Object retrieve(int index) throws IndexOutOfBoundsException {
-		return null;
+	public Object get(int index) throws IndexOutOfBoundsException {
+		if (index < 0 || index >= this.size) {
+			throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+		}
+		Node current = this.head;
+		for (int i = 0; i < index; i++) {
+			current = current.getNext();
+		}
+		return current.getData();
 	}
 
 	@Override
 	public int indexOf(Object data) {
-		return -1;
+		Node current = this.head;
+		int index = 0;
+		while (current != null) {
+			if (current.getData().equals(data)) {
+				return index;
+			}
+			current = current.getNext();
+			index++;
+		}
+		return -1; 
 	}
 
 	@Override
 	public boolean contains(Object data) {
-		return false;
+		return indexOf(data) != -1;
+	}
+
+	
+
+	@Override
+	public void clear() {
+		
+		this.head = null;
+		this.tail = null;
+		this.size = 0;
+	}
+
+	@Override
+	public void remove(int index) throws IndexOutOfBoundsException {
+		
 	}
 }
