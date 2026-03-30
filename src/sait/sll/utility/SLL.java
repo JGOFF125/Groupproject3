@@ -142,7 +142,45 @@ public class SLL implements LinkedListADT, Serializable {
 	}
 
 	@Override
-	public void remove(int index) throws IndexOutOfBoundsException {
+	@Override
+public void delete(int index) throws IndexOutOfBoundsException {
+	if (index < 0 || index >= this.size) {
+		throw new IndexOutOfBoundsException("Index " + index + " is out of bounds.");
+	}
+
+
+	if (index == 0) {
+		this.head = this.head.getNext();
+
+		
+		if (this.head == null) {
+			this.tail = null;
+		}
+	}
+
+	else if (index == this.size - 1) {
+		Node current = this.head;
+
+		for (int i = 0; i < this.size - 2; i++) {
+			current = current.getNext();
+		}
+
+		current.setNext(null);
+		this.tail = current;
+	}
+
+	else {
+		Node current = this.head;
+
+		for (int i = 0; i < index - 1; i++) {
+			current = current.getNext();
+		}
+
+		current.setNext(current.getNext().getNext());
+	}
+
+	this.size--;
+}
 		
 	}
 }
