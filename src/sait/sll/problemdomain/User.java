@@ -3,7 +3,6 @@ package sait.sll.problemdomain;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +28,15 @@ public class User implements Serializable {
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 
+	public boolean isCorrectPassword(String password) {
+	    if (this.password == null && password == null) {
+	        return true;
+	    }
+	    if (this.password == null || password == null) {
+	        return false;
+	    }
+	    return this.password.equals(password);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
